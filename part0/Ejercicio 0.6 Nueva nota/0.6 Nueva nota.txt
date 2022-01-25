@@ -1,0 +1,29 @@
+note over browser:
+usuario escribe la nota y pulsa SAVE
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+La solicitud POST a la dirección newnotespa contiene 
+la nueva nota como datos JSON que contienen tanto 
+el contenido de la nota (content) como la marca de tiempo (date):
+{content: "hola a todo", date: "2022-01-25T16:22:08.915Z"}
+La cabecera Content-Type de la solicitud le dice al servidor 
+que los datos incluidos están representados en formato JSON.
+end note
+
+server-->browser:  Status Code: 201 
+note over server:
+El comando document.getElementById('notes_form') le indica al código que 
+busque el elemento form de la página, y para registrar un controlador de eventos 
+para manejar el evento de envío del formulario. 
+El controlador de eventos llama inmediatamente al método e.preventDefault() 
+para evitar el manejo predeterminado del envío de formularios. 
+El método predeterminado enviaría los datos al servidor y 
+provocaría una nueva solicitud GET, lo que no queremos que suceda.
+Luego, el controlador de eventos crea una nueva nota, 
+la agrega a la lista de notas con el comando notes.push(note), 
+vuelve a representar la lista de notas en la página y 
+envía la nueva nota al servidor.
+end note

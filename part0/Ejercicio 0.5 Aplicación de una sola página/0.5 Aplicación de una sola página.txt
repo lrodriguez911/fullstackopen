@@ -1,0 +1,29 @@
+note over browser
+usuario escribe la direccion en el navegador solicitando el documento
+end note
+
+browser-server HTTP GET httpsstudies.cs.helsinki.fiexampleappspa
+
+note over server
+El servidor responde enviando el documento HTML.
+end note
+
+server--browser  HTML-Code
+note over server
+Al leer los datos del documento HTML empieza a pedir los elementos que se detallan
+end note
+browser-server HTTP GET httpsstudies.cs.helsinki.fiexampleappmain.css
+server--browser main.css
+browser-server HTTP GET httpsstudies.cs.helsinki.fiexampleappspa.js
+server--browser spa.js
+note over browser
+el navegador ejecuta el codigo spa.js
+y realiza una solicitud del JSON en el server
+end note
+browser-server HTTP GET httpsstudies.cs.helsinki.fiexampleappdata.json
+server--browser [{content hhbjknk, date 2022-01-25T084018.127Z},…]
+
+note over browser
+Cuando se han obtenido los datos, el navegador ejecuta un controlador de eventos, 
+que muestra las notas en la página utilizando DOM-API.
+end note

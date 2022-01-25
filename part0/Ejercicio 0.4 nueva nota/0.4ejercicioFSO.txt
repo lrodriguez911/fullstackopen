@@ -1,0 +1,35 @@
+note over browser:
+usuario escribe nota y pulsa enviar
+se envia mediante una request POST la nota al server 
+a la direccion https://studies.cs.helsinki.fi/exampleapp/new_note
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+El servidor responde con el código de estado HTTP 302. 
+Se trata de una [redirección de URL]con la que el servidor solicita al navegador 
+que realice una nueva solicitud HTTP GET a la dirección definida en la 
+Ubicación (Location) del encabezado: la dirección notes.
+end note
+
+server-->browser:  HTTP 302
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-Code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+
+note over browser:
+el navegador ejecuta el codigo main.js
+y realiza una solicitud del JSON en el server
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+
+note over browser:
+Cuando se han obtenido los datos, el navegador ejecuta un controlador de eventos, 
+que muestra las notas en la página utilizando DOM-API.
+end note
